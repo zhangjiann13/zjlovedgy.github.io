@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGY · 恋爱一周年纪念</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4081;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .heart:before, .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(45deg); }
+            50% { transform: translateY(-20px) rotate(45deg); }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #e91e63;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7b1fa2;
+            margin-bottom: 20px;
+        }
+        
+        .anniversary-date {
+            font-size: 1.5rem;
+            color: #ff4081;
+            margin: 10px 0;
+        }
+        
+        .days-together {
+            font-size: 1.3rem;
+            color: #7b1fa2;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            margin: 0 15px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 100px;
+        }
+        
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            color: #7b1fa2;
+        }
+        
+        section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .photo-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .photo-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .memory-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .message-form textarea {
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #f8bbd9;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        
+        .message-form button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .message-form button:hover {
+            background: #c2185b;
+        }
+        
+        .message-wall {
+            margin-top: 30px;
+        }
+        
+        .message-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message-time {
+            font-size: 0.9rem;
+            color: #888;
+            text-align: right;
+            margin-top: 5px;
+        }
+        
+        .music-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .music-btn {
+            background: #7b1fa2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+        
+        .music-btn i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #7b1fa2;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .countdown-item {
+                margin: 5px;
+                min-width: 80px;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="hearts" id="hearts-container"></div>
+            <h1>DGY · 恋爱一周年</h1>
+            <p class="subtitle">我们的爱情故事，从这一天开始</p>
+            <p class="anniversary-date" id="anniversary-date"></p>
+            <p class="days-together" id="days-together"></p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">天</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">小时</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">分钟</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">秒</div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="memory-section">
+            <h2>我们的美好回忆</h2>
+            <div class="photo-gallery">
+                <!-- 这里可以替换为实际的照片 -->
+                <div class="photo-item">
+                    <img src="https://i.postimg.cc/pdf2ShgB/1.jpg" alt="美好回忆">
+                </div>
+                <div class="photo-item">
+                    <img src="https://i.postimg.cc/XqpqtNKk/2.jpg" alt="美好回忆">
+                </div>
+                <div class="photo-item">
+                    <img src="https://i.postimg.cc/bJnFgkWx/3.jpg" alt="美好回忆">
+                </div>
+                <div class="photo-item">
+                    <img src="https://i.postimg.cc/3J8n4s80/4.jpg" alt="美好回忆">
+                </div>
+            </div>
+        </section>
+        
+        <section class="story-section">
+            <h2>我们的故事</h2>
+            <div class="memory-text">
+                <p>亲爱的DGY，</p>
+                <p>时间过得真快，转眼间我们已经在一起一周年了。这一年里，我们一起经历了那么多美好的事情，从初次见面的紧张与期待，到现在的默契与犯贱hh。</p>
+                <p>还记得我们第一次约会时的场景吗？那天晚上天桥，当脱口而出的喜欢成为加速心跳的良药。从那一刻起，我就知道，你就是我喜欢，爱的人。</p>
+                <p>这一年里，我们一起笑过、闹过，也一起相隔千里。每一次的相处都让我更加确信，和你在一起是我做过最正确的决定。你很好！</p>
+                <p>未来的路还很长，我希望能一直牵着你的手，一起走过每一个春夏秋冬，一起创造更多美好的回忆。</p>
+                <p>，廿廿，爱你，不止今天，而是岁岁年年。</p>
+            </div>
+        </section>
+        
+        <section class="message-section">
+            <h2>留下我们的纪念</h2>
+            <form class="message-form">
+                <textarea placeholder="写下你想对DGY说的话..."></textarea>
+                <button type="submit">保存留言</button>
+            </form>
+            
+            <div class="message-wall">
+                <div class="message-item">
+                    <p>点点，一周年快乐！我要我们一直在一起。</p>
+                    <div class="message-time">刚刚</div>
+                </div>
+                <!-- 更多留言会在这里动态添加 -->
+            </div>
+        </section>
+        
+        <div class="music-player">
+            <button class="music-btn" id="music-toggle">
+                <i>♪</i> 播放我们的歌曲
+            </button>
+            <audio id="bg-music" loop>
+                <!--https://music.163.com/#/song?id=2136889734 -->
+                <source src="https://m801.music.126.net/20251104195252/0e5f961882bce83b32e13cb9c367f7a2/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34567494077/f784/7095/e17f/24dffc27c7c80c632ee5db12b29e9a01.mp3?vuutv=JnHlEnTF3U8h/tAGGSGUVsACALY5xYV/xE5PkrKfcM8gqxOUXnr5/M+lN4qeqA/RoNvnH6gjj9rOjOtPfoZIycAy7Ttf9Z1N11dj5AGqxrw=&cdntag=bWFyaz1vc193ZWIscXVhbGl0eV9zdGFuZGFyZA" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 与DGY的恋爱一周年纪念 | 设计制作: ZJ , Deepseek,and Douyin</p>
+    </footer>
+
+    <script>
+        // 创建漂浮的心形
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                
+                // 随机位置和动画延迟
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 5;
+                
+                heart.style.left = `${left}%`;
+                heart.style.top = `${top}%`;
+                heart.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // 计算恋爱天数和周年倒计时
+        function calculateAnniversary() {
+            // 恋爱开始日期为2024年11月7日
+            const startDate = new Date('2024-11-07');
+            const currentDate = new Date();
+            
+            // 计算已经在一起的天数
+            const timeTogether = currentDate - startDate;
+            const daysTogether = Math.floor(timeTogether / (1000 * 60 * 60 * 24));
+            
+            // 显示在一起天数
+            document.getElementById('days-together').textContent = 
+                `我们已经在一起 ${daysTogether} 天了`;
+            
+            // 计算一周年日期
+            const anniversaryDate = new Date(startDate);
+            anniversaryDate.setFullYear(startDate.getFullYear() + 1);
+            
+            // 显示周年日期
+            document.getElementById('anniversary-date').textContent = 
+                `一周年纪念日: ${anniversaryDate.getFullYear()}年${anniversaryDate.getMonth() + 1}月${anniversaryDate.getDate()}日`;
+            
+            // 计算倒计时
+            const diffTime = anniversaryDate - currentDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+            const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+            
+            // 更新倒计时显示
+            document.getElementById('days').textContent = diffDays;
+            document.getElementById('hours').textContent = diffHours;
+            document.getElementById('minutes').textContent = diffMinutes;
+            document.getElementById('seconds').textContent = diffSeconds;
+        }
+        
+        // 留言功能
+        document.querySelector('.message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const textarea = this.querySelector('textarea');
+            const message = textarea.value.trim();
+            
+            if (message) {
+                const messageWall = document.querySelector('.message-wall');
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message-item';
+                
+                const now = new Date();
+                const timeString = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+                
+                newMessage.innerHTML = `
+                    <p>${message}</p>
+                    <div class="message-time">${timeString}</div>
+                `;
+                
+                messageWall.insertBefore(newMessage, messageWall.firstChild);
+                textarea.value = '';
+                
+                // 保存到本地存储
+                saveMessageToLocalStorage(message, timeString);
+            }
+        });
+        
+        // 保存留言到本地存储
+        function saveMessageToLocalStorage(message, time) {
+            let messages = JSON.parse(localStorage.getItem('anniversaryMessages')) || [];
+            messages.unshift({message, time});
+            localStorage.setItem('anniversaryMessages', JSON.stringify(messages));
+        }
+        
+        // 加载保存的留言
+        function loadMessagesFromLocalStorage() {
+            const messages = JSON.parse(localStorage.getItem('anniversaryMessages')) || [];
+            const messageWall = document.querySelector('.message-wall');
+            
+            // 清空现有留言（除了示例留言）
+            while (messageWall.children.length > 1) {
+                messageWall.removeChild(messageWall.lastChild);
+            }
+            
+            messages.forEach(msg => {
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message-item';
+                newMessage.innerHTML = `
+                    <p>${msg.message}</p>
+                    <div class="message-time">${msg.time}</div>
+                `;
+                messageWall.appendChild(newMessage);
+            });
+        }
+        
+        // 音乐播放控制
+        document.getElementById('music-toggle').addEventListener('click', function() {
+            const audio = document.getElementById('bg-music');
+            
+            if (audio.paused) {
+                audio.play().then(() => {
+                    this.innerHTML = '<i>♪</i> 暂停音乐';
+                }).catch(error => {
+                    console.log('音频播放失败:', error);
+                    alert('无法播放音乐，请检查音乐文件路径或网络连接');
+                });
+            } else {
+                audio.pause();
+                this.innerHTML = '<i>♪</i> 播放我们的歌曲';
+            }
+        });
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createHearts();
+            calculateAnniversary();
+            loadMessagesFromLocalStorage();
+            
+            // 每秒更新倒计时
+            setInterval(calculateAnniversary, 1000);
+        });
+    </script>
+</body>
+</html>
